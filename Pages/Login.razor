@@ -1,0 +1,25 @@
+﻿@page "/login"
+@layout HeadlessLayout
+@inject NavigationManager UriHelper
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+
+<h3>Login</h3>
+
+<button @onclick="LoginAsync">Login</button>
+
+@code {
+
+    private async Task LoginAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            UriHelper.NavigateTo("");
+        }
+    }
+
+}
